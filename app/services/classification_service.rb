@@ -18,9 +18,8 @@ class ClassificationService
 
   def parse_data(file)
     return notify_and_log_error('Not existing file') unless file_exist?(file)
-    binding.pry
     adapter = find_parser(file)
-    # parser = adapter.new(file)
+    parser = adapter.new(file)
     # parser.parse
   end
 
@@ -30,7 +29,6 @@ class ClassificationService
 
   def find_parser(name)
     adapter = "ParserAdapter::#{name.singularize.titleize}".safe_constantize
-    binding.pry
     return adapter if adapter.present?
     context.fail!(error: error.message)
   end

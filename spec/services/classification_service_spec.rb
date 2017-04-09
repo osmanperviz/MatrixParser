@@ -44,7 +44,9 @@ RSpec.describe ClassificationService do
         end
       end
       context 'non existing parser' do
-        # implement later
+        it '...' do
+          subject.call
+        end
       end
     end
   end
