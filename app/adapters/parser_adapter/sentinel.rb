@@ -19,9 +19,6 @@ module ParserAdapter
 
     private
 
-    def collect_uniq_route_ids(hash)
-      hash.map { |row| row['route_id'] }.uniq
-    end
 
     def collect_routes_with_same_id(hash, id)
       hash
@@ -40,7 +37,8 @@ module ParserAdapter
     end
 
     def format_object(sequences, index)
-      { source: file_name,
+      {
+        source: file_name,
         start_node: sequences[index]['node'],
         end_node: sequences[index + 1]['node'],
         start_time: format_time(sequences[index]['time']),

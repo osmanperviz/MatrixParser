@@ -2,8 +2,6 @@
 class ClassificationService
   include Interactor
 
-  # attr_accessor :result
-
   def call
     parse_all_files
   end
@@ -20,7 +18,7 @@ class ClassificationService
     return notify_and_log_error('Not existing file') unless file_exist?(file)
     adapter = find_parser(file)
     parser = adapter.new(file)
-    # parser.parse
+    context.results = parser.parse
   end
 
   def file_exist? file
