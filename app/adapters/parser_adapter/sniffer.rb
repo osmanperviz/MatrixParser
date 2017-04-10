@@ -1,6 +1,5 @@
 module ParserAdapter
   class Sniffer < BaseParser
-
     def perform
       extract_files('.csv')
       return [] unless instances_exsists?
@@ -13,8 +12,8 @@ module ParserAdapter
 
     def instances_exsists?
       sequences.present? &&
-      node_times.present? &&
-      routes.present?
+        node_times.present? &&
+        routes.present?
     end
 
     def addapt_note_items
@@ -42,10 +41,10 @@ module ParserAdapter
 
     def collect_routes_with_same_id(id)
       merged_hash
-      .select { |row| row['route_id'] == id }
-      .sort_by { |row| row['node_time_id'] }
+        .select { |row| row[:route_id] == id }
+        .sort_by { |row| row[:node_time_id] }
     end
-    
+
     def format_object(row)
       {
         source: file_name,

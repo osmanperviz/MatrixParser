@@ -7,7 +7,7 @@ RSpec.describe ClassificationService do
         subject.call
       end
 
-      %w(sentinels sniffers loopholes).each do |file|
+      %w[sentinels sniffers loopholes].each do |file|
         it "recive #{file} as arrgument" do
           allow_any_instance_of(described_class).to receive(:parse_data)
           expect_any_instance_of(described_class).to receive(:parse_data).with(file).at_least(:once)
@@ -31,21 +31,15 @@ RSpec.describe ClassificationService do
         end
       end
     end
-    context 'finding parser' do
-      # context 'existing parser' do
-      #   before do
-      #     allow_any_instance_of(described_class).to receive(:find_parser)
-      #   end
-      #   %w(Sentinel Sniffer Loophole).each do |file|
-      #     it "recive #{file} as arrgument" do
-      #       expect_any_instance_of(described_class).to receive(:find_parser).and_return("ParserAdapter::#{file}".safe_constantize)
-      #       subject.call
-      #     end
-      #   end
-      # end
-      context 'non existing parser' do
-        it '...' do
+    context '#find_parser' do
+      context 'existing parser' do
+        after do
           subject.call
+        end
+        %w[Sentinel Sniffer Loophole].each do |parser|
+          it "call #{parser} parser" do
+            expect_any_instance_of("ParserAdapter::#{parser}".safe_constantize).to receive(:perform).and_return([])
+          end
         end
       end
     end

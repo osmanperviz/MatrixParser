@@ -19,11 +19,10 @@ module ParserAdapter
 
     private
 
-
     def collect_routes_with_same_id(hash, id)
       hash
-      .select { |row| row[:route_id] == id }
-      .sort_by { |row| row[:index] }
+        .select { |row| row[:route_id] == id }
+        .sort_by { |row| row[:index] }
     end
 
     def sentinels_exist?
@@ -46,9 +45,8 @@ module ParserAdapter
 
     def format_time(time)
       DateTime.strptime(time, '%Y-%m-%dT%H:%M:%S%z')
-            .utc
-            .strftime('%FT%T')
+              .utc
+              .strftime('%FT%T')
     end
-
   end
 end

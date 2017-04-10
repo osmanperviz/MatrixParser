@@ -1,7 +1,7 @@
 RSpec.describe FetchAndUnzipService do
-subject { described_class }
+  subject { described_class }
   let(:zip_files) do
-    %w(sentinels sniffers loopholes).map do |name|
+    %w[sentinels sniffers loopholes].map do |name|
       "#{name}.zip"
     end.sort
   end
@@ -19,7 +19,7 @@ subject { described_class }
     end
     context '#unzip' do
       it 'unzips ziped files' do
-        %w(sentinels sniffers loopholes).each do |src|
+        %w[sentinels sniffers loopholes].each do |src|
           expect(Dir.entries(Rails.root.join('tmp', src)).count).to be > 0
         end
       end

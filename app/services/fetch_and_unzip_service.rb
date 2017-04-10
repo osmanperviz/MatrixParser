@@ -52,7 +52,7 @@ class FetchAndUnzipService
   end
 
   def notify_and_log_error(error)
-     Rails.logger.error error.message
-     context.fail!(:error, error.message)
+    Rails.logger.error error.message
+    context.fail!(error: error.message)
   end
 end

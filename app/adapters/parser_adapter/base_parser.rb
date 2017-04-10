@@ -11,10 +11,10 @@ module ParserAdapter
       @merged_hash = []
     end
 
-  private
+    private
 
     def converted_files
-      @files.map { |file|  file_to_hash(file) }
+      @files.map { |file| file_to_hash(file) }
     end
 
     def extract_files(extension)
@@ -51,7 +51,6 @@ module ParserAdapter
       JSON.parse(IO.read(file)).with_indifferent_access
     end
 
-
     def route_ids(hash)
       hash.map { |row| row[:route_id] }.uniq
     end
@@ -59,14 +58,13 @@ module ParserAdapter
     def merge_hashes(base_hash, array, field_1, field_2 = nil)
       field_2 ||= field_1
       to_merge = array.detect do |new_hash|
-                   new_hash[field_2] == base_hash[field_1]
-                 end
+        new_hash[field_2] == base_hash[field_1]
+      end
       base_hash.merge(to_merge.except(field_2)) if to_merge.present?
     end
 
     def collect_uniq_route_ids(hash)
       hash.map { |row| row[:route_id] }.uniq
     end
-
   end
 end
