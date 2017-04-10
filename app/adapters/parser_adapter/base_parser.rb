@@ -65,7 +65,8 @@ module ParserAdapter
     end
 
     def collect_uniq_route_ids(hash)
-      hash.map { |row| row['route_id'] }.uniq
+      hash.map { |row| row[:route_id] }.uniq
     end
+
   end
 end

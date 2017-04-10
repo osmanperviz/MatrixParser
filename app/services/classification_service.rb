@@ -1,6 +1,7 @@
 # responible for calling right parser
 class ClassificationService
   include Interactor
+  attr_accessor :opla
 
   def call
     parse_all_files
@@ -9,6 +10,7 @@ class ClassificationService
   private
 
   def parse_all_files
+    context.parsed_data = []
     %w(sentinels sniffers loopholes).each do |file|
       parse_data(file)
     end
@@ -17,8 +19,8 @@ class ClassificationService
   def parse_data(file)
     return notify_and_log_error('Not existing file') unless file_exist?(file)
     adapter = find_parser(file)
-    parser = adapter.new(file)
-    context.results = parser.parse
+    result = adapter.new(file).perform
+    context.parsed_data += result
   end
 
   def file_exist? file

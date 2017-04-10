@@ -13,8 +13,8 @@ module ParserAdapter
             end
           end
         end
-        results
       end
+      results
     end
 
     private
@@ -22,32 +22,32 @@ module ParserAdapter
 
     def collect_routes_with_same_id(hash, id)
       hash
-      .select { |row| row['route_id'] == id }
-      .sort_by { |row| row['index'] }
+      .select { |row| row[:route_id] == id }
+      .sort_by { |row| row[:index] }
     end
 
     def sentinels_exist?
       converted_files.any?
     end
 
-    def format_time(time)
-      DateTime.strptime(time, '%Y-%m-%dT%H:%M:%S%z')
-            .utc
-            .strftime('%FT%T')
-    end
-
     def format_object(sequences, index)
       {
         source: file_name,
-        start_node: sequences[index]['node'],
-        end_node: sequences[index + 1]['node'],
-        start_time: format_time(sequences[index]['time']),
-        end_time: format_time(sequences[index + 1]['time'])
+        start_node: sequences[index][:node],
+        end_node: sequences[index + 1][:node],
+        start_time: format_time(sequences[index][:time]),
+        end_time: format_time(sequences[index + 1][:time])
       }
     end
 
     def last_row?(sequences, index)
       sequences[index + 1].present?
+    end
+
+    def format_time(time)
+      DateTime.strptime(time, '%Y-%m-%dT%H:%M:%S%z')
+            .utc
+            .strftime('%FT%T')
     end
 
   end

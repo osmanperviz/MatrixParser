@@ -25,16 +25,21 @@ module ParserAdapter
       merged_hash.each do |row|
         results << format_object(row)
       end
+      results
     end
 
     def format_object(row)
       {
         source: file_name,
-        start_node: row['start_node'],
-        end_node: row['end_node'],
-        start_time: row['start_time'],
-        end_time: row['end_time']
+        start_node: row[:start_node],
+        end_node: row[:end_node],
+        start_time: format_time(row[:start_time]),
+        end_time: format_time(row[:end_time])
       }
     end
+
+     def format_time(time)
+       time.delete('Z')
+     end
   end
 end
