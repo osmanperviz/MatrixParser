@@ -3,14 +3,14 @@ module ParserAdapter
 
     def perform
       extract_files('.json')
-      return [] unless instances_exsist?
+      return [] unless instances_exist?
       addapt_routes
       create_format
     end
 
     private
 
-    def instances_exsist?
+    def instances_exist?
       routes.present? && node_pairs.present?
     end
 

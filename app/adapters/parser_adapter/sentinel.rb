@@ -1,23 +1,32 @@
 module ParserAdapter
   class Sentinel < BaseParser
+
     def perform
       return [] unless sentinels_exist?
 
+      operate_over_sentinels
+    end
+
+    private
+
+    def operate_over_sentinels
       converted_files.each do |wrapper|
         wrapper.values.each do |row|
           collect_uniq_route_ids(row).each do |id|
             sequences = collect_routes_with_same_id(row, id)
-            0.upto(sequences.count).each do |index|
-              next unless last_row?(sequences, index)
-              results << format_object(sequences, index)
-            end
+            create_result(ssequences)
           end
         end
       end
       results
     end
 
-    private
+    def create_results(sequences)
+      0.upto(sequences.count).each do |index|
+        next unless last_row?(sequences, index)
+        results << format_object(sequences, index)
+      end
+    end
 
     def collect_routes_with_same_id(hash, id)
       hash

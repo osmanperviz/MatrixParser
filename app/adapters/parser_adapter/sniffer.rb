@@ -2,7 +2,7 @@ module ParserAdapter
   class Sniffer < BaseParser
     def perform
       extract_files('.csv')
-      return [] unless instances_exsists?
+      return [] unless instances_exist?
       addapt_note_items
       addapt_route_times
       addapt_format
@@ -10,7 +10,7 @@ module ParserAdapter
 
     private
 
-    def instances_exsists?
+    def instances_exist?
       sequences.present? &&
         node_times.present? &&
         routes.present?
