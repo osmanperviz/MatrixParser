@@ -14,7 +14,7 @@ module ParserAdapter
         wrapper.values.each do |row|
           collect_uniq_route_ids(row).each do |id|
             sequences = collect_routes_with_same_id(row, id)
-            create_result(ssequences)
+            create_result(sequences)
           end
         end
       end
